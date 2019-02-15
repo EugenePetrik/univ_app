@@ -25,7 +25,9 @@ gem 'jbuilder', '~> 2.5'
 # Modern responsive front-end framework based on Material Design
 gem 'materialize-sass', '~> 1.0.0'
 # Fantastic icon collection for Rails projects
-gem 'material_icons' 
+gem 'material_icons'
+# jQuery for Rails
+gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
