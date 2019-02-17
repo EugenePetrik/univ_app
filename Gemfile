@@ -43,8 +43,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  # Add fake data
+  # Add Factory Girl
   gem 'factory_bot_rails', '~> 5.0'
+  # Add fake data
+  gem 'faker', '~> 1.6', '>= 1.6.6'
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
 end
