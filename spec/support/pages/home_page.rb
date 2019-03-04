@@ -15,7 +15,7 @@ class HomePage < GeneralPage
     element.click
   end
 
-  def course_info_with(course_id)
+  def open_course_info_for(course_id)
     element = find(:xpath, "//div[@data-qa='#{course_id}']//a[text()='Info']")
     element.click
   end
