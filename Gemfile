@@ -62,10 +62,14 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.13', '>= 3.13.2'
+  gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'chromedriver-helper', '~> 2.1'
+  gem 'database_cleaner', '~> 1.7'
   gem 'selenium-webdriver'
+  gem 'site_prism', '~> 3.0', '>= 3.0.3'
+  gem 'simplecov', '~> 0.16.1'
   # RSpec testing framework
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
 end
