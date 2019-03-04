@@ -25,16 +25,7 @@
           <% if logged_in? %>
             <li><%= link_to t('.students'), students_path %></li>
           <% end %>
-<<<<<<< 2f8e8052751a6d6b532de0ed57bf95edd33c99fa
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= t('.account') %><i class="material-icons right">arrow_drop_down</i></a></li>
-=======
-          <% if logged_in? %>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Account<i class="material-icons right">arrow_drop_down</i></a></li>
-          <% else %>
-            <li><%= link_to 'Sign Up', new_student_path %></li>
-            <li><%= link_to 'Log In', login_path %></li>
-          <% end %>
->>>>>>> Add the Sign Up button
         </ul>
         <ul class="sidenav" id="mobile-demo">
           <li><%= link_to t('.courses'), root_path %></li>
