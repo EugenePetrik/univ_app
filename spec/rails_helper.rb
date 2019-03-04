@@ -10,6 +10,9 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'simplecov'
 
+# Load all files with methods from the support directory
+Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
