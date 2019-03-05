@@ -1,4 +1,4 @@
-class StudentsPage
+class StudentsPage < GeneralPage
   set_url '/students'
 
   STUDENT_CARD_SELECTOR = 'data-qa'.freeze
