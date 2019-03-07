@@ -10,6 +10,8 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'simplecov'
 
+require File.expand_path('../support/pages/general_page', __FILE__)
+
 # Load all files with methods from the support directory
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
