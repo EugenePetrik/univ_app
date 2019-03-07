@@ -3,6 +3,7 @@ class GeneralPage < SitePrism::Page
   element :brand_logo_title, 'a.brand-logo'
   element :courses_link, :xpath, '(//a[text()="Courses"])[1]'
   element :students_link, :xpath, '(//a[text()="Students"])[1]'
+  element :account_link,'a[data-target="dropdown1"]'
   element :sign_up_link, 'a[href="/students/new"]'
   element :log_in_link, :xpath, '(//a[@href="/login"])[2]'
 
@@ -13,21 +14,20 @@ class GeneralPage < SitePrism::Page
   end
 
   # Footer
-  element :brand_logo_footer, '//h5[text()="Tech University"]'
-  element :information_title, '//h5[text()="Information"]'
+  element :brand_logo_footer, :xpath, '//h5[text()="Tech University"]'
+  element :information_title, :xpath, '//h5[text()="Information"]'
   element :help_link, 'a[href="/help"]'
   element :about_link, 'a[href="/about"]'
   element :contact_us_link, 'a[href="/contact_us"]'
   element :copyright_title, 'div.grey-text'
 
   def nav_bar_visible?
-    all_visible?(:brand_logo_title, :courses_link, :students_link,
-                 :sign_up_link, :log_in_link)
+    all_visible?(:brand_logo_title, :courses_link, :sign_up_link, :log_in_link)
   end
 
   def nav_bar_for_login_user_visible?
     all_visible?(:brand_logo_title, :courses_link, :students_link,
-                 :account_block)
+                 :account_link)
   end
 
   def footer_visible?
