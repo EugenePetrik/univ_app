@@ -19,4 +19,8 @@ class HomePage < GeneralPage
     element = find(:xpath, "//div[@data-qa='#{course_id}']//a[text()='Info']")
     element.click
   end
+
+  def page_visible?
+    all_visible?(:course_title)
+  end
 end
