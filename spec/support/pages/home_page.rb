@@ -5,6 +5,7 @@ class HomePage < GeneralPage
 
   element :course_title, 'h3.center-align'
   elements :course_cards, "div[#{COURSE_CARD_SELECTOR}]"
+  elements :course_titles, 'span.card-title'
 
   def course_cards_ids
     course_cards.map { |course| course[COURSE_CARD_SELECTOR].to_i }

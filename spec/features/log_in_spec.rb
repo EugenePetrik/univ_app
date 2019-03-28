@@ -32,7 +32,6 @@ RSpec.feature 'Log In', type: :feature do
       expect(home_page).to be_displayed
       expect(home_page).to be_page_visible
       expect(home_page).to be_nav_bar_for_login_user_visible
-      expect(home_page).to be_footer_visible
     end
   end
 
@@ -56,11 +55,7 @@ RSpec.feature 'Log In', type: :feature do
       password = student.password
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to be_displayed
-      expect(log_in_page).to be_page_visible
-      expect(log_in_page).to be_nav_bar_visible
       expect(log_in_page).to have_content('Something was wrong with your login information')
-      expect(log_in_page).to be_footer_visible
     end
   end
 
@@ -70,11 +65,7 @@ RSpec.feature 'Log In', type: :feature do
       password = "pass_#{student.password}"
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to be_displayed
-      expect(log_in_page).to be_page_visible
-      expect(log_in_page).to be_nav_bar_visible
       expect(log_in_page).to have_content('Something was wrong with your login information')
-      expect(log_in_page).to be_footer_visible
     end
   end
 
@@ -84,11 +75,7 @@ RSpec.feature 'Log In', type: :feature do
       password = " "
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to be_displayed
-      expect(log_in_page).to be_page_visible
-      expect(log_in_page).to be_nav_bar_visible
       expect(log_in_page).to have_content('Something was wrong with your login information')
-      expect(log_in_page).to be_footer_visible
     end
   end
 end
