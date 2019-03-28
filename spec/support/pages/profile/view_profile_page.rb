@@ -12,7 +12,6 @@ class ViewProfilePage < GeneralPage
   end
 
   def page_visible?
-    all_visible?(:user_name, :user_email, :edit_profile_button,
-                 :course_enroll_title)
+    all_visible?(:user_name, :user_email, :course_enroll_title)
   end
 end
