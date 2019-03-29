@@ -2,11 +2,9 @@ RSpec.feature 'Students', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:studets_page) { StudentsViewPage.new }
   let(:profile_page) { ViewProfilePage.new }
-
   let!(:student1) { create(:student, courses: [course3, course4, course1]) }
   let!(:student2) { create(:student, courses: [course1, course1]) }
   let!(:student3) { create(:student) }
-
   let(:course1) { create(:course) }
   let(:course2) { create(:course) }
   let(:course3) { create(:course) }
@@ -18,12 +16,12 @@ RSpec.feature 'Students', type: :feature do
     studets_page.load
   end
 
-  it { expect(studets_page).to be_displayed }
-  it { expect(studets_page).to be_page_visible }
-  it { expect(studets_page).to be_nav_bar_for_login_user_visible }
-  it { expect(studets_page).to be_footer_visible }
-
   context 'when open students page' do
+    it { expect(studets_page).to be_displayed }
+    it { expect(studets_page).to be_page_visible }
+    it { expect(studets_page).to be_nav_bar_for_login_user_visible }
+    it { expect(studets_page).to be_footer_visible }
+
     it 'the number of students equal 3' do
       expect(studets_page.student_cards.count).to eq 3
     end

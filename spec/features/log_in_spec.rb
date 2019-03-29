@@ -5,10 +5,12 @@ RSpec.feature 'Log In', type: :feature do
 
   before { log_in_page.load }
 
-  it { expect(log_in_page).to be_displayed }
-  it { expect(log_in_page).to be_page_visible }
-  it { expect(log_in_page).to be_nav_bar_visible }
-  it { expect(log_in_page).to be_footer_visible }
+  context 'when open log in page' do
+    it { expect(log_in_page).to be_displayed }
+    it { expect(log_in_page).to be_page_visible }
+    it { expect(log_in_page).to be_nav_bar_visible }
+    it { expect(log_in_page).to be_footer_visible }
+  end
 
   context 'with correct email and password' do
     it 'student logs in' do

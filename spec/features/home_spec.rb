@@ -14,12 +14,12 @@ RSpec.feature 'Home', type: :feature do
     home_page.load
   end
 
-  it { expect(home_page).to be_displayed }
-  it { expect(home_page).to be_page_visible }
-  it { expect(home_page).to be_nav_bar_for_login_user_visible }
-  it { expect(home_page).to be_footer_visible }
-
   context 'when open home page' do
+    it { expect(home_page).to be_displayed }
+    it { expect(home_page).to be_page_visible }
+    it { expect(home_page).to be_nav_bar_for_login_user_visible }
+    it { expect(home_page).to be_footer_visible }
+
     it 'shows title' do
       expect(home_page.title).to eq 'Tech University'
     end
@@ -39,7 +39,7 @@ RSpec.feature 'Home', type: :feature do
     end
   end
 
-  context 'when click to enrol' do
+  context 'when click to enrol link' do
     it 'course enrolled' do
       home_page.course_enroll_with(course1.id)
 
@@ -51,8 +51,8 @@ RSpec.feature 'Home', type: :feature do
     end
   end
 
-  context 'when click to course info' do
-    it 'courses page displayes' do
+  context 'when click to course info link' do
+    it 'course info page displayes' do
       home_page.open_course_info_for(course1.id)
 
       expect(course_info).to be_displayed
