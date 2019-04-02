@@ -1,7 +1,7 @@
 RSpec.feature 'Home', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
-  let(:profile_page) { ViewProfilePage.new }
+  let(:view_profile_page) { ViewProfilePage.new }
   let(:course_info) { CourseInfo.new }
   let(:student) { create(:student) }
   let!(:course1) { create(:course) }
@@ -24,7 +24,7 @@ RSpec.feature 'Home', type: :feature do
       expect(home_page.title).to eq 'Tech University'
     end
 
-    it 'the number of courses equal 3' do
+    it 'course cards are displayed' do
       expect(home_page.course_cards.count).to eq 3
     end
 
@@ -43,10 +43,10 @@ RSpec.feature 'Home', type: :feature do
     it 'course enrolled' do
       home_page.course_enroll_with(course1.id)
 
-      expect(profile_page).to be_displayed
-      expect(profile_page).to be_page_visible
+      expect(view_profile_page).to be_displayed
+      expect(view_profile_page).to be_page_visible
       expect(home_page).to be_nav_bar_for_login_user_visible
-      expect(profile_page).to have_content "You have successfully enrolled in #{course1.name}"
+      expect(view_profile_page).to have_content "You have successfully enrolled in #{course1.name}"
       expect(home_page).to be_footer_visible
     end
   end

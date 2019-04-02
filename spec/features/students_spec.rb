@@ -1,7 +1,7 @@
 RSpec.feature 'Students', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:studets_page) { StudentsViewPage.new }
-  let(:profile_page) { ViewProfilePage.new }
+  let(:view_profile_page) { ViewProfilePage.new }
   let!(:student1) { create(:student, courses: [course3, course4, course1]) }
   let!(:student2) { create(:student, courses: [course1, course1]) }
   let!(:student3) { create(:student) }
@@ -41,14 +41,14 @@ RSpec.feature 'Students', type: :feature do
     it 'courses are not displayed' do
       studets_page.open_student_profile_for(student3.id)
 
-      expect(profile_page).to be_displayed
-      expect(profile_page).to be_page_visible
-      expect(profile_page).to be_nav_bar_for_login_user_visible
-      expect(profile_page.user_name.text).to eq student3.name
-      expect(profile_page.user_email.text).to eq student3.email
-      expect(profile_page.course_links.count).to eq 0
-      expect(profile_page).to have_content('None')
-      expect(profile_page).to be_footer_visible
+      expect(view_profile_page).to be_displayed
+      expect(view_profile_page).to be_page_visible
+      expect(view_profile_page).to be_nav_bar_for_login_user_visible
+      expect(view_profile_page.user_name.text).to eq student3.name
+      expect(view_profile_page.user_email.text).to eq student3.email
+      expect(view_profile_page.course_links.count).to eq 0
+      expect(view_profile_page).to have_content('None')
+      expect(view_profile_page).to be_footer_visible
     end
   end
 
@@ -56,8 +56,8 @@ RSpec.feature 'Students', type: :feature do
     it 'courses are displayed' do
       studets_page.open_student_profile_for(student1.id)
 
-      expect(profile_page.course_links.count).to eq 3
-      expect(profile_page.course_links.map(&:text))
+      expect(view_profile_page.course_links.count).to eq 3
+      expect(view_profile_page.course_links.map(&:text))
         .to match_array([course1.name, course3.name, course4.name])
     end
   end
@@ -66,7 +66,7 @@ RSpec.feature 'Students', type: :feature do
     it 'Edit Profile button is displayed' do
       studets_page.open_student_profile_for(student1.id)
 
-      expect(profile_page).to have_css('a.waves-effect')
+      expect(view_profile_page).to have_css('a.waves-effect')
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.feature 'Students', type: :feature do
     it 'Edit Profile button is not displayed' do
       studets_page.open_student_profile_for(student2.id)
 
-      expect(profile_page).not_to have_css('a.waves-effect')
+      expect(view_profile_page).not_to have_css('a.waves-effect')
     end
   end
 end
