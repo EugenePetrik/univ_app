@@ -1,4 +1,4 @@
-class CourseInfo < GeneralPage
+class ViewCoursePage < GeneralPage
   set_url '/courses/{course_id}'
 
   element :course_title, '.card-title'

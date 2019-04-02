@@ -2,7 +2,7 @@ RSpec.feature 'Home', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
   let(:view_profile_page) { ViewProfilePage.new }
-  let(:course_info) { CourseInfo.new }
+  let(:course_info) { ViewCoursePage.new }
   let(:student) { create(:student) }
   let!(:course1) { create(:course) }
   let!(:course2) { create(:course) }

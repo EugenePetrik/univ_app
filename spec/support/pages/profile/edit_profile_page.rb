@@ -1,5 +1,5 @@
 class EditProfilePage < GeneralPage
-  set_url set_url '/students/{student_id}/edit'
+  set_url '/students/{student_id}/edit'
 
   element :edit_your_profile_title, 'h3.header'
   element :name_input, '#student_name'
@@ -8,11 +8,11 @@ class EditProfilePage < GeneralPage
   element :pass_confirm_input, '#student_password_confirmation'
   element :sign_up_button, 'button[name="button"]'
 
-  def edit_profile_with(args)
-    name_input.set(args[:name]) unless args[:name].nil?
-    email_input.set(args[:email]) unless args[:email].nil?
-    pass_input.set(args[:pass]) unless args[:pass].nil?
-    pass_confirm_input.set(args[:pass_confirm]) unless args[:pass_confirm].nil?
+  def edit_profile_with(options = {})
+    name_input.set(options[:name]) unless options[:name].nil?
+    email_input.set(options[:email]) unless options[:email].nil?
+    pass_input.set(options[:pass]) unless options[:pass].nil?
+    pass_confirm_input.set(options[:pass_confirm]) unless options[:pass_confirm].nil?
     sign_up_button.click
   end
 

@@ -2,7 +2,7 @@ RSpec.feature 'View Profile', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:view_profile_page) { ViewProfilePage.new }
   let(:edit_profile_page) { EditProfilePage.new }
-  let!(:student) { create(:student, courses: [course1, course2, course3]) }
+  let(:student) { create(:student, courses: [course1, course2, course3]) }
   let(:course1) { create(:course) }
   let(:course2) { create(:course) }
   let(:course3) { create(:course) }
