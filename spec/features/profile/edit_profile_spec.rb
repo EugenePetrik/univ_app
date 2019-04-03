@@ -44,12 +44,9 @@ RSpec.feature 'Edit Profile', type: :feature do
 
   context 'without editing password' do
     it "profile saved" do
-      name = Faker::Name.name
-      email = Faker::Internet.email
-
       params_user_data = {
-        name: name,
-        email: email
+        name: Faker::Name.name,
+        email: Faker::Internet.email
       }
 
       edit_profile_page.edit_profile_with(params_user_data)
@@ -69,7 +66,7 @@ RSpec.feature 'Edit Profile', type: :feature do
     end
   end
 
-  context 'with short name' do
+  context 'with too short name' do
     it 'raises an error' do
       name_length = (1..4).to_a.sample
       name = Faker::Name.initials(name_length)

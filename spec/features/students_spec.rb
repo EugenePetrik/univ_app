@@ -16,7 +16,7 @@ RSpec.feature 'Students', type: :feature do
     studets_page.load
   end
 
-  context 'when open students page' do
+  context 'when open page' do
     it { expect(studets_page).to be_displayed }
     it { expect(studets_page).to be_page_visible }
     it { expect(studets_page).to be_nav_bar_for_login_user_visible }

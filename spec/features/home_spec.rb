@@ -2,7 +2,7 @@ RSpec.feature 'Home', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
   let(:view_profile_page) { ViewProfilePage.new }
-  let(:course_info) { ViewCoursePage.new }
+  let(:view_course_page) { ViewCoursePage.new }
   let(:student) { create(:student) }
   let!(:course1) { create(:course) }
   let!(:course2) { create(:course) }
@@ -14,7 +14,7 @@ RSpec.feature 'Home', type: :feature do
     home_page.load
   end
 
-  context 'when open home page' do
+  context 'when open page' do
     it { expect(home_page).to be_displayed }
     it { expect(home_page).to be_page_visible }
     it { expect(home_page).to be_nav_bar_for_login_user_visible }
@@ -55,12 +55,12 @@ RSpec.feature 'Home', type: :feature do
     it 'course info page displayes' do
       home_page.open_course_info_for(course1.id)
 
-      expect(course_info).to be_displayed
-      expect(course_info).to be_page_visible
-      expect(course_info).to be_nav_bar_for_login_user_visible
-      expect(course_info.course_title.text).to eq course1.name
-      expect(course_info.course_description.text).to eq course1.description
-      expect(course_info).to be_footer_visible
+      expect(view_course_page).to be_displayed
+      expect(view_course_page).to be_page_visible
+      expect(view_course_page).to be_nav_bar_for_login_user_visible
+      expect(view_course_page.course_title.text).to eq course1.name
+      expect(view_course_page.course_description.text).to eq course1.description
+      expect(view_course_page).to be_footer_visible
     end
   end
 end
