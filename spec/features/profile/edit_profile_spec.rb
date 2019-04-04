@@ -66,10 +66,19 @@ RSpec.feature 'Edit Profile', type: :feature do
     end
   end
 
+  context 'with too long name' do
+    it 'raises an error' do
+      name = Faker::Lorem.characters(rand(51..100))
+
+      edit_profile_page.edit_profile_with(name: name)
+
+      expect(view_profile_page).to have_content('Name is too long (maximum is 50 characters)')
+    end
+  end
+
   context 'with too short name' do
     it 'raises an error' do
-      name_length = (1..4).to_a.sample
-      name = Faker::Name.initials(name_length)
+      name = Faker::Lorem.characters(rand(1..4))
 
       edit_profile_page.edit_profile_with(name: name)
 
@@ -82,6 +91,16 @@ RSpec.feature 'Edit Profile', type: :feature do
       edit_profile_page.edit_profile_with(email: '  ')
 
       expect(view_profile_page).to have_content('Email can\'t be blank')
+      expect(view_profile_page).to have_content('Email is invalid')
+    end
+  end
+
+  context 'with invalid email' do
+    it 'raises an error' do
+      email = "#{Faker::Internet.username}@#{Faker::Internet.domain_word}"
+
+      edit_profile_page.edit_profile_with(email: email)
+
       expect(view_profile_page).to have_content('Email is invalid')
     end
   end

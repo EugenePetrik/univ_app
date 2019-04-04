@@ -19,13 +19,13 @@ RSpec.feature 'Create Course', type: :feature do
   end
 
   context 'with valid data' do
-    it 'course saved' do
-      params_course_data = {
-        name: Faker::Educator.course_name,
-        short_name: Faker::Lorem.characters(8).upcase,
-        description: Faker::Lorem.paragraph_by_chars
-      }
+    params_course_data = {
+      name: Faker::Educator.course_name,
+      short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+      description: Faker::Lorem.paragraph_by_chars(rand(10..300))
+    }
 
+    it 'course saved' do
       create_course_page.create_course_with(params_course_data)
 
       expect(view_course_page).to be_displayed
@@ -38,13 +38,19 @@ RSpec.feature 'Create Course', type: :feature do
       expect(view_course_page.course_description.text).to eq course_description
       expect(view_course_page).to be_footer_visible
     end
+
+    it 'creates the record in the database' do
+      expect do
+        create_course_page.create_course_with(params_course_data)
+      end.to change(Course, :count).by(1)
+    end
   end
 
   context 'without course name' do
     it 'raises an error' do
       params_course_data = {
-        short_name: Faker::Lorem.characters(8).upcase,
-        description: Faker::Lorem.paragraph_by_chars
+        short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
       }
 
       create_course_page.create_course_with(params_course_data)
@@ -54,17 +60,73 @@ RSpec.feature 'Create Course', type: :feature do
     end
   end
 
-  context 'without short name' do
+  context 'with too short course name' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Lorem.characters(rand(1..4)).upcase,
+        short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Name is too short (minimum is 5 characters)')
+    end
+  end
+
+  context 'with too long course name' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Lorem.characters(rand(51..100)).upcase,
+        short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Name is too long (maximum is 50 characters)')
+    end
+  end
+
+  context 'without course short name' do
     it 'raises an error' do
       params_course_data = {
         name: Faker::Educator.course_name,
-        description: Faker::Lorem.paragraph_by_chars
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
       }
 
       create_course_page.create_course_with(params_course_data)
 
       expect(create_course_page).to have_content('Short name can\'t be blank')
       expect(create_course_page).to have_content('Short name is too short (minimum is 3 characters)')
+    end
+  end
+
+  context 'with too short course short name' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Educator.course_name,
+        short_name: Faker::Lorem.characters(rand(1..2)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Short name is too short (minimum is 3 characters)')
+    end
+  end
+
+  context 'with too long course short name' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Educator.course_name,
+        short_name: Faker::Lorem.characters(rand(16..30)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(10..300))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Short name is too long (maximum is 15 characters)')
     end
   end
 
@@ -79,6 +141,34 @@ RSpec.feature 'Create Course', type: :feature do
 
       expect(create_course_page).to have_content('Description can\'t be blank')
       expect(create_course_page).to have_content('Description is too short (minimum is 10 characters)')
+    end
+  end
+
+  context 'with too short course description' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Educator.course_name,
+        short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(1..9))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Description is too short (minimum is 10 characters)')
+    end
+  end
+
+  context 'with too long course description' do
+    it 'raises an error' do
+      params_course_data = {
+        name: Faker::Educator.course_name,
+        short_name: Faker::Lorem.characters(rand(3..15)).upcase,
+        description: Faker::Lorem.paragraph_by_chars(rand(301..350))
+      }
+
+      create_course_page.create_course_with(params_course_data)
+
+      expect(create_course_page).to have_content('Description is too long (maximum is 300 characters)')
     end
   end
 end
