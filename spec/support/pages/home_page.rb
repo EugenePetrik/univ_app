@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class HomePage < GeneralPage
   set_url '/'
 
-  COURSE_CARD_SELECTOR = 'data-qa'.freeze
+  COURSE_CARD_SELECTOR = 'data-qa'
 
   element :course_title, 'h3.center-align'
   elements :course_cards, "div[#{COURSE_CARD_SELECTOR}]"

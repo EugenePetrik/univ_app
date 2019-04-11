@@ -1,4 +1,6 @@
-RSpec.feature 'Students', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Students', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:studets_page) { StudentsViewPage.new }
   let(:view_profile_page) { ViewProfilePage.new }

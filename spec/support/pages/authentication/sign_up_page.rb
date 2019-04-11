@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SignUpPage < GeneralPage
   set_url '/students/new'
 

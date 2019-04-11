@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ViewProfilePage < GeneralPage
   set_url '/students/{student_id}'
 
-  COURSE_LINK_SELECTOR = 'data-qa'.freeze
+  COURSE_LINK_SELECTOR = 'data-qa'
 
   element :user_name, :xpath, '(//span[@class="card-title"])[1]'
   element :user_email, :xpath, '(//span[@class="card-title"]/following-sibling::p)[1]'

@@ -1,4 +1,6 @@
-RSpec.feature 'Help', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Help', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:help_page) { HelpPage.new }
   let(:student) { create(:student) }

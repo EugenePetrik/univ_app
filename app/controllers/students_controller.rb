@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentsController < ApplicationController
   skip_before_action :require_user
   before_action :set_student, only: [:show, :edit, :update]
@@ -7,8 +9,7 @@ class StudentsController < ApplicationController
     @students = Student.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @student = Student.new
@@ -24,12 +25,15 @@ class StudentsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @student.update(student_params)
+<<<<<<< 868afc48e0764b9b6c14d1efc3f31f30fa74ae09
       flash[:notice] = t('.success_updated_profile')
+=======
+      flash[:notice] = 'You have successfully updated your profile'
+>>>>>>> Add rubocop-rspec gem
       redirect_to @student
     else
       render 'edit'

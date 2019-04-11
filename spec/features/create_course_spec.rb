@@ -1,4 +1,6 @@
-RSpec.feature 'Create Course', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Create Course', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
   let(:view_course_page) { ViewCoursePage.new }

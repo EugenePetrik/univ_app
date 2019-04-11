@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class StudentsViewPage < GeneralPage
   set_url '/students'
 
-  STUDENT_CARD_SELECTOR = 'data-qa'.freeze
+  STUDENT_CARD_SELECTOR = 'data-qa'
 
   element :student_title, 'h3.center-align'
   elements :student_cards, "div[#{STUDENT_CARD_SELECTOR}]"

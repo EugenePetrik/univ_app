@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCoursePage < GeneralPage
   set_url '/courses/new'
 
@@ -16,6 +18,6 @@ class CreateCoursePage < GeneralPage
 
   def page_visible?
     all_visible?(:course_header, :name_input, :short_name_input,
-      :description_input, :create_course_button)
+                 :description_input, :create_course_button)
   end
 end

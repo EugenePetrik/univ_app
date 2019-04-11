@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LogInPage < GeneralPage
   set_url '/login'
 

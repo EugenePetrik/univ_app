@@ -1,4 +1,6 @@
-RSpec.feature 'ContactUs', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'ContactUs', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:contact_us_page) { ContactUsPage.new }
   let(:student) { create(:student) }

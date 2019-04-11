@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class GeneralPage < SitePrism::Page
   # Navigation
   element :brand_logo_title, 'a.brand-logo'
   element :courses_link, :xpath, '(//a[text()="Courses"])[1]'
   element :students_link, :xpath, '(//a[text()="Students"])[1]'
-  element :account_link,'a[data-target="dropdown1"]'
+  element :account_link, 'a[data-target="dropdown1"]'
   element :sign_up_link, 'a[href="/students/new"]'
   element :log_in_link, :xpath, '(//a[@href="/login"])[2]'
 

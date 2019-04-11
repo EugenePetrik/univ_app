@@ -1,4 +1,6 @@
-RSpec.feature 'View Profile', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'View Profile', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:view_profile_page) { ViewProfilePage.new }
   let(:edit_profile_page) { EditProfilePage.new }

@@ -1,4 +1,6 @@
-RSpec.feature 'Home', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Home', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
   let(:view_profile_page) { ViewProfilePage.new }

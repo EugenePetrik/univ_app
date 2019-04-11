@@ -1,4 +1,6 @@
-RSpec.feature 'Edit Profile', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Edit Profile', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:view_profile_page) { ViewProfilePage.new }
   let(:edit_profile_page) { EditProfilePage.new }
@@ -18,10 +20,10 @@ RSpec.feature 'Edit Profile', type: :feature do
   end
 
   context 'with valid data' do
-    it "profile saved" do
+    it 'profile saved' do
       name = Faker::Name.name
       email = Faker::Internet.email
-      pass = pass_confirm =  Faker::Internet.password
+      pass = pass_confirm = Faker::Internet.password
 
       params_user_data = {
         name: name,
@@ -43,7 +45,7 @@ RSpec.feature 'Edit Profile', type: :feature do
   end
 
   context 'without editing password' do
-    it "profile saved" do
+    it 'profile saved' do
       params_user_data = {
         name: Faker::Name.name,
         email: Faker::Internet.email

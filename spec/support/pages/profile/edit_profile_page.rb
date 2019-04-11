@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EditProfilePage < GeneralPage
   set_url '/students/{student_id}/edit'
 

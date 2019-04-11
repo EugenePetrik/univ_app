@@ -1,4 +1,6 @@
-RSpec.feature 'Log In', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'Log In', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
   let(:student) { create(:student) }
@@ -53,7 +55,7 @@ RSpec.feature 'Log In', type: :feature do
 
   context 'with empty email' do
     it 'raises an error' do
-      email = " "
+      email = ' '
       password = student.password
       log_in_page.login_with(email, password)
 
@@ -74,7 +76,7 @@ RSpec.feature 'Log In', type: :feature do
   context 'with empty password' do
     it 'raises an error' do
       email = student.email.upcase
-      password = " "
+      password = ' '
       log_in_page.login_with(email, password)
 
       expect(log_in_page).to have_content('Something was wrong with your login information')

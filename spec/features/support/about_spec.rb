@@ -1,4 +1,6 @@
-RSpec.feature 'About', type: :feature do
+# frozen_string_literal: true
+
+RSpec.describe 'About', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:about_page) { AboutPage.new }
   let(:student) { create(:student) }
