@@ -10,7 +10,6 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'spec_helper'
 require 'rspec/rails'
-require 'simplecov'
 
 require File.expand_path('support/pages/general_page', __dir__)
 
