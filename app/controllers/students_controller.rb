@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      flash[:notice] = "You have successfully signed up!"
+      flash[:notice] = t('.success_sign_up')
       redirect_to @student
     else
       render 'new'
@@ -29,7 +29,7 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update(student_params)
-      flash[:notice] = "You have successfully updated your profile"
+      flash[:notice] = t('.success_updated_profile')
       redirect_to @student
     else
       render 'edit'
@@ -48,7 +48,7 @@ class StudentsController < ApplicationController
 
   def require_same_student
     if current_user != @student
-      flash[:notice] = 'You can only edit your own profile'
+      flash[:notice] = t('.edit_own_profile')
       redirect_to student_path(current_user)
     end
   end
