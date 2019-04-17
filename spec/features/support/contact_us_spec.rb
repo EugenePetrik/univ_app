@@ -11,7 +11,7 @@ RSpec.describe 'ContactUs', type: :feature do
     contact_us_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(contact_us_page).to be_displayed }
     it { expect(contact_us_page).to be_page_visible }
     it { expect(contact_us_page).to be_nav_bar_for_login_user_visible }

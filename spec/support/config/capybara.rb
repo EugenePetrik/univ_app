@@ -20,7 +20,7 @@ Capybara.register_driver(:chrome) do |app|
   options.add_argument('window-size=1600,1268')
 
   # Run headless by default unless CHROME_HEADLESS specified
-  options.add_argument('headless') unless ENV['CHROME_HEADLESS']
+  options.add_argument('headless') unless /^(false|no|0)$/.match?(ENV['CHROME_HEADLESS'])
 
   options.add_argument('disable-gpu')
 

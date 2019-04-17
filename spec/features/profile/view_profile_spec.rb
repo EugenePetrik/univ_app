@@ -8,7 +8,7 @@ RSpec.describe 'View Profile', type: :feature do
   let(:course1) { create(:course) }
   let(:course2) { create(:course) }
   let(:course3) { create(:course) }
-  let(:course4) { create(:course) }
+  let!(:course4) { create(:course) }
 
   before do
     log_in_page.load
@@ -16,7 +16,7 @@ RSpec.describe 'View Profile', type: :feature do
     view_profile_page.load(student_id: student.id)
   end
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(view_profile_page).to be_displayed }
     it { expect(view_profile_page).to be_page_visible }
     it { expect(view_profile_page).to be_nav_bar_for_login_user_visible }
@@ -41,7 +41,7 @@ RSpec.describe 'View Profile', type: :feature do
   end
 
   context 'when click to the edit profile button' do
-    it 'edit profile page is displayed' do
+    it 'edit profile page is displayed', tag: 'smoke' do
       view_profile_page.click_to_edit_profile_button
 
       expect(edit_profile_page).to be_displayed

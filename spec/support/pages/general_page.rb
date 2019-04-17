@@ -2,39 +2,36 @@
 
 class GeneralPage < SitePrism::Page
   # Navigation
-  element :brand_logo_title, 'a.brand-logo'
-  element :courses_link, :xpath, '(//a[text()="Courses"])[1]'
-  element :students_link, :xpath, '(//a[text()="Students"])[1]'
-  element :account_link, 'a[data-target="dropdown1"]'
-  element :sign_up_link, 'a[href="/students/new"]'
-  element :log_in_link, :xpath, '(//a[@href="/login"])[2]'
+  element :brand_title, 'a.brand-logo'
+  element :courses, :xpath, '(//a[text()="Courses"])[1]'
+  element :students, :xpath, '(//a[text()="Students"])[1]'
+  element :account, 'a[data-target="dropdown1"]'
 
   section :account_block, 'a[data-target="dropdown1"]' do
-    element :your_profile_link, :xpath, '(//a[text()="Your Profile"])[1]'
-    element :edit_profile_link, :xpath, '(//a[text()="Edit Profile"])[1]'
-    element :log_out_link, :xpath, '(//a[text()="Log Out"])[1]'
+    element :your_profile, :xpath, '(//a[text()="Your Profile"])[1]'
+    element :edit_profile, :xpath, '(//a[text()="Edit Profile"])[1]'
+    element :log_out, :xpath, '(//a[text()="Log Out"])[1]'
   end
 
   # Footer
-  element :brand_logo_footer, :xpath, '//h5[text()="Tech University"]'
-  element :information_title, :xpath, '//h5[text()="Information"]'
-  element :help_link, 'a[href="/help"]'
-  element :about_link, 'a[href="/about"]'
-  element :contact_us_link, 'a[href="/contact_us"]'
-  element :copyright_title, 'div.grey-text'
+  element :brand_footer, :xpath, '//h5[text()="Tech University"]'
+  element :info_title, :xpath, '//h5[text()="Information"]'
+  element :help, 'a[href="/help"]'
+  element :about, 'a[href="/about"]'
+  element :contact_us, 'a[href="/contact_us"]'
+  element :copyright, 'div.grey-text'
 
   def nav_bar_visible?
-    all_visible?(:brand_logo_title, :courses_link, :sign_up_link, :log_in_link)
+    all_visible?(:brand_title, :courses)
   end
 
   def nav_bar_for_login_user_visible?
-    all_visible?(:brand_logo_title, :courses_link, :students_link,
-                 :account_link)
+    all_visible?(:brand_title, :courses, :students, :account)
   end
 
   def footer_visible?
-    all_visible?(:brand_logo_footer, :information_title, :help_link,
-                 :about_link, :contact_us_link, :copyright_title)
+    all_visible?(:brand_footer, :info_title, :help,
+                 :about, :contact_us, :copyright)
   end
 
   private

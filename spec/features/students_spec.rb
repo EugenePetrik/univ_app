@@ -18,7 +18,7 @@ RSpec.describe 'Students', type: :feature do
     studets_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(studets_page).to be_displayed }
     it { expect(studets_page).to be_page_visible }
     it { expect(studets_page).to be_nav_bar_for_login_user_visible }
@@ -40,7 +40,7 @@ RSpec.describe 'Students', type: :feature do
   end
 
   context 'when open profile page for student without courses' do
-    it 'courses are not displayed' do
+    it 'courses are not displayed', tag: 'smoke' do
       studets_page.open_student_profile_for(student3.id)
 
       expect(view_profile_page).to be_displayed
@@ -49,13 +49,13 @@ RSpec.describe 'Students', type: :feature do
       expect(view_profile_page.user_name.text).to eq student3.name
       expect(view_profile_page.user_email.text).to eq student3.email
       expect(view_profile_page.course_links.count).to eq 0
-      expect(view_profile_page).to have_content('None')
+      expect(view_profile_page).to have_content(I18n.t('students.show.none'))
       expect(view_profile_page).to be_footer_visible
     end
   end
 
   context 'when open profile page for student with courses' do
-    it 'courses are displayed' do
+    it 'courses are displayed', tag: 'smoke' do
       studets_page.open_student_profile_for(student1.id)
 
       expect(view_profile_page.course_links.count).to eq 3
@@ -65,7 +65,7 @@ RSpec.describe 'Students', type: :feature do
   end
 
   context 'when open own student profile page' do
-    it 'Edit Profile button is displayed' do
+    it 'Edit Profile button is displayed', tag: 'smoke' do
       studets_page.open_student_profile_for(student1.id)
 
       expect(view_profile_page).to have_css('a.waves-effect')
@@ -73,7 +73,7 @@ RSpec.describe 'Students', type: :feature do
   end
 
   context 'when open profile page for another student' do
-    it 'Edit Profile button is not displayed' do
+    it 'Edit Profile button is not displayed', tag: 'smoke' do
       studets_page.open_student_profile_for(student2.id)
 
       expect(view_profile_page).not_to have_css('a.waves-effect')

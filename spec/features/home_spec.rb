@@ -16,14 +16,14 @@ RSpec.describe 'Home', type: :feature do
     home_page.load
   end
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(home_page).to be_displayed }
     it { expect(home_page).to be_page_visible }
     it { expect(home_page).to be_nav_bar_for_login_user_visible }
     it { expect(home_page).to be_footer_visible }
 
     it 'shows title' do
-      expect(home_page.title).to eq 'Tech University'
+      expect(home_page.title).to eq(I18n.t('layouts.navigation.tech_university'))
     end
 
     it 'course cards are displayed' do
@@ -42,19 +42,19 @@ RSpec.describe 'Home', type: :feature do
   end
 
   context 'when click to enrol link' do
-    it 'course enrolled' do
+    it 'course enrolled', tag: 'smoke' do
       home_page.course_enroll_with(course1.id)
 
       expect(view_profile_page).to be_displayed
       expect(view_profile_page).to be_page_visible
       expect(home_page).to be_nav_bar_for_login_user_visible
-      expect(view_profile_page).to have_content "You have successfully enrolled in #{course1.name}"
+      expect(view_profile_page).to have_content(I18n.t('success_enroll': course1.name))
       expect(home_page).to be_footer_visible
     end
   end
 
   context 'when click to course info link' do
-    it 'course info page displayes' do
+    it 'course info page displayes', tag: 'smoke' do
       home_page.open_course_info_for(course1.id)
 
       expect(view_course_page).to be_displayed

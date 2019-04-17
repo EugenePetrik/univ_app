@@ -29,11 +29,7 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update(student_params)
-<<<<<<< 868afc48e0764b9b6c14d1efc3f31f30fa74ae09
       flash[:notice] = t('.success_updated_profile')
-=======
-      flash[:notice] = 'You have successfully updated your profile'
->>>>>>> Add rubocop-rspec gem
       redirect_to @student
     else
       render 'edit'

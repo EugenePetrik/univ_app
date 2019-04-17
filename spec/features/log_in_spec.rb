@@ -3,11 +3,12 @@
 RSpec.describe 'Log In', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
+  let(:view_profile_page) { ViewProfilePage.new }
   let(:student) { create(:student) }
 
   before { log_in_page.load }
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(log_in_page).to be_displayed }
     it { expect(log_in_page).to be_page_visible }
     it { expect(log_in_page).to be_nav_bar_visible }
@@ -15,15 +16,15 @@ RSpec.describe 'Log In', type: :feature do
   end
 
   context 'with correct email and password' do
-    it 'student logs in' do
+    it 'student logs in', tag: 'smoke' do
       email = student.email
       password = student.password
       log_in_page.login_with(email, password)
 
-      expect(home_page).to be_displayed
-      expect(home_page).to be_page_visible
-      expect(home_page).to be_nav_bar_for_login_user_visible
-      expect(home_page).to be_footer_visible
+      expect(view_profile_page).to be_displayed
+      expect(view_profile_page).to be_page_visible
+      expect(view_profile_page).to be_nav_bar_for_login_user_visible
+      expect(view_profile_page).to be_footer_visible
     end
   end
 
@@ -33,9 +34,10 @@ RSpec.describe 'Log In', type: :feature do
       password = student.password
       log_in_page.login_with(email, password)
 
-      expect(home_page).to be_displayed
-      expect(home_page).to be_page_visible
-      expect(home_page).to be_nav_bar_for_login_user_visible
+      expect(view_profile_page).to be_displayed
+      expect(view_profile_page).to be_page_visible
+      expect(view_profile_page).to be_nav_bar_for_login_user_visible
+      expect(view_profile_page).to be_footer_visible
     end
   end
 
@@ -48,7 +50,7 @@ RSpec.describe 'Log In', type: :feature do
       expect(log_in_page).to be_displayed
       expect(log_in_page).to be_page_visible
       expect(log_in_page).to be_nav_bar_visible
-      expect(log_in_page).to have_content('Something was wrong with your login information')
+      expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
       expect(log_in_page).to be_footer_visible
     end
   end
@@ -59,7 +61,7 @@ RSpec.describe 'Log In', type: :feature do
       password = student.password
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to have_content('Something was wrong with your login information')
+      expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 
@@ -69,7 +71,7 @@ RSpec.describe 'Log In', type: :feature do
       password = "pass_#{student.password}"
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to have_content('Something was wrong with your login information')
+      expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 
@@ -79,7 +81,7 @@ RSpec.describe 'Log In', type: :feature do
       password = ' '
       log_in_page.login_with(email, password)
 
-      expect(log_in_page).to have_content('Something was wrong with your login information')
+      expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
   end
 end

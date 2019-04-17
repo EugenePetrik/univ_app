@@ -12,7 +12,7 @@ RSpec.describe 'Edit Profile', type: :feature do
     edit_profile_page.load(student_id: student.id)
   end
 
-  context 'when open page' do
+  context 'when open page', tag: 'smoke' do
     it { expect(edit_profile_page).to be_displayed }
     it { expect(edit_profile_page).to be_page_visible }
     it { expect(edit_profile_page).to be_nav_bar_for_login_user_visible }
@@ -20,16 +20,14 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with valid data' do
-    it 'profile saved' do
-      name = Faker::Name.name
-      email = Faker::Internet.email
+    it 'profile saved', tag: 'smoke' do
       pass = pass_confirm = Faker::Internet.password
 
       params_user_data = {
-        name: name,
-        email: email,
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
         pass: pass,
-        pass_confirm: pass_confirm
+        pass_confirm: pass
       }
 
       edit_profile_page.edit_profile_with(params_user_data)
@@ -37,7 +35,7 @@ RSpec.describe 'Edit Profile', type: :feature do
       expect(view_profile_page).to be_displayed
       expect(view_profile_page).to be_page_visible
       expect(view_profile_page).to be_nav_bar_for_login_user_visible
-      expect(view_profile_page).to have_content('You have successfully updated your profile')
+      expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
       expect(view_profile_page.user_name.text).to eq params_user_data[:name]
       expect(view_profile_page.user_email.text).to eq params_user_data[:email]
       expect(view_profile_page).to be_footer_visible
@@ -45,15 +43,12 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'without editing password' do
-    it 'profile saved' do
-      params_user_data = {
-        name: Faker::Name.name,
-        email: Faker::Internet.email
-      }
+    it 'profile saved', tag: 'smoke' do
+      params_user_data = attributes_for(:student)
 
       edit_profile_page.edit_profile_with(params_user_data)
 
-      expect(view_profile_page).to have_content('You have successfully updated your profile')
+      expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
       expect(view_profile_page.user_name.text).to eq params_user_data[:name]
       expect(view_profile_page.user_email.text).to eq params_user_data[:email]
     end
@@ -63,8 +58,8 @@ RSpec.describe 'Edit Profile', type: :feature do
     it 'raises an error' do
       edit_profile_page.edit_profile_with(name: '  ')
 
-      expect(view_profile_page).to have_content('Name can\'t be blank')
-      expect(view_profile_page).to have_content('Name is too short (minimum is 5 characters)')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.name_is_blank'))
+      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
     end
   end
 
@@ -74,7 +69,7 @@ RSpec.describe 'Edit Profile', type: :feature do
 
       edit_profile_page.edit_profile_with(name: name)
 
-      expect(view_profile_page).to have_content('Name is too long (maximum is 50 characters)')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_long'))
     end
   end
 
@@ -84,7 +79,7 @@ RSpec.describe 'Edit Profile', type: :feature do
 
       edit_profile_page.edit_profile_with(name: name)
 
-      expect(view_profile_page).to have_content('Name is too short (minimum is 5 characters)')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
     end
   end
 
@@ -92,8 +87,8 @@ RSpec.describe 'Edit Profile', type: :feature do
     it 'raises an error' do
       edit_profile_page.edit_profile_with(email: '  ')
 
-      expect(view_profile_page).to have_content('Email can\'t be blank')
-      expect(view_profile_page).to have_content('Email is invalid')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.email_is_blank'))
+      expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
     end
   end
 
@@ -103,7 +98,7 @@ RSpec.describe 'Edit Profile', type: :feature do
 
       edit_profile_page.edit_profile_with(email: email)
 
-      expect(view_profile_page).to have_content('Email is invalid')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
     end
   end
 
@@ -116,7 +111,7 @@ RSpec.describe 'Edit Profile', type: :feature do
 
       edit_profile_page.edit_profile_with(params_user_data)
 
-      expect(view_profile_page).to have_content('Password confirmation doesn\'t match Password')
+      expect(view_profile_page).to have_content(I18n.t('errors.student.pass_does_not_match'))
     end
   end
 end

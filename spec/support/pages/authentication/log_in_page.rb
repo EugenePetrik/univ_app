@@ -4,17 +4,17 @@ class LogInPage < GeneralPage
   set_url '/login'
 
   element :log_in_title, 'h3.header'
-  element :email_input, '#logins_email'
-  element :pass_input, '#logins_password'
+  element :email, '#logins_email'
+  element :password, '#logins_password'
   element :log_in_button, 'button[name="button"]'
 
-  def page_visible?
-    all_visible?(:log_in_title, :email_input, :pass_input, :log_in_button)
+  def login_with(email, password)
+    self.email.set(email)
+    self.password.set(password)
+    log_in_button.click
   end
 
-  def login_with(email, password)
-    email_input.set(email)
-    pass_input.set(password)
-    log_in_button.click
+  def page_visible?
+    all_visible?(:log_in_title, :email, :password, :log_in_button)
   end
 end
