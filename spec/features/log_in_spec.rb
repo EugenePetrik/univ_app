@@ -3,7 +3,6 @@
 RSpec.describe 'Log In', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:home_page) { HomePage.new }
-  let(:view_profile_page) { ViewProfilePage.new }
   let(:student) { create(:student) }
 
   before { log_in_page.load }
@@ -16,6 +15,8 @@ RSpec.describe 'Log In', type: :feature do
   end
 
   context 'with correct email and password' do
+    let(:view_profile_page) { ViewProfilePage.new }
+
     it 'student logs in', tag: 'smoke' do
       email = student.email
       password = student.password
@@ -29,6 +30,8 @@ RSpec.describe 'Log In', type: :feature do
   end
 
   context 'with email in uppercase' do
+    let(:view_profile_page) { ViewProfilePage.new }
+
     it 'student logs in' do
       email = student.email.upcase
       password = student.password
@@ -57,9 +60,7 @@ RSpec.describe 'Log In', type: :feature do
 
   context 'with empty email' do
     it 'raises an error' do
-      email = ' '
-      password = student.password
-      log_in_page.login_with(email, password)
+      log_in_page.login_with(' ', student.password)
 
       expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end
@@ -77,9 +78,7 @@ RSpec.describe 'Log In', type: :feature do
 
   context 'with empty password' do
     it 'raises an error' do
-      email = student.email.upcase
-      password = ' '
-      log_in_page.login_with(email, password)
+      log_in_page.login_with(student.email.upcase, ' ')
 
       expect(log_in_page).to have_content(I18n.t('logins.create.something_was_wrong'))
     end

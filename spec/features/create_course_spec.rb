@@ -2,11 +2,8 @@
 
 RSpec.describe 'Create Course', type: :feature do
   let(:log_in_page) { LogInPage.new }
-  let(:home_page) { HomePage.new }
-  let(:view_course_page) { ViewCoursePage.new }
   let(:create_course_page) { CreateCoursePage.new }
   let(:student) { create(:student) }
-  let(:course) { attributes_for(:course) }
 
   before do
     log_in_page.load
@@ -22,6 +19,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with valid data', tag: 'smoke' do
+    let(:view_course_page) { ViewCoursePage.new }
+    let(:course) { attributes_for(:course) }
+
     it 'course saved' do
       create_course_page.create_course_with(course)
 
@@ -53,9 +53,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too short course name' do
-    it 'raises an error' do
-      name = Faker::Lorem.characters(rand(1..4)).upcase
+    let(:name) { Faker::Lorem.characters(rand(1..4)).upcase }
 
+    it 'raises an error' do
       create_course_page.create_course_with(name: name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_short'))
@@ -63,9 +63,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too long course name' do
-    it 'raises an error' do
-      name = Faker::Lorem.characters(rand(51..100)).upcase
+    let(:name) { Faker::Lorem.characters(rand(51..100)).upcase }
 
+    it 'raises an error' do
       create_course_page.create_course_with(name: name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.name_too_long'))
@@ -82,9 +82,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too short course short name' do
-    it 'raises an error' do
-      short_name = Faker::Lorem.characters(rand(1..2)).upcase
+    let(:short_name) { Faker::Lorem.characters(rand(1..2)).upcase }
 
+    it 'raises an error' do
       create_course_page.create_course_with(short_name: '')
 
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_short'))
@@ -92,9 +92,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too long course short name' do
-    it 'raises an error' do
-      short_name = Faker::Lorem.characters(rand(16..30)).upcase
+    let(:short_name) { Faker::Lorem.characters(rand(16..30)).upcase }
 
+    it 'raises an error' do
       create_course_page.create_course_with(short_name: short_name)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.short_name_too_long'))
@@ -111,9 +111,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too short course description' do
-    it 'raises an error' do
-      description = Faker::Lorem.paragraph_by_chars(rand(1..9))
+    let(:description) { Faker::Lorem.paragraph_by_chars(rand(1..9)) }
 
+    it 'raises an error' do
       create_course_page.create_course_with(description: description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_short'))
@@ -121,9 +121,9 @@ RSpec.describe 'Create Course', type: :feature do
   end
 
   context 'with too long course description' do
-    it 'raises an error' do
-      description = Faker::Lorem.paragraph_by_chars(rand(301..350))
+    let(:description) { Faker::Lorem.paragraph_by_chars(rand(301..350)) }
 
+    it 'raises an error' do
       create_course_page.create_course_with(description: description)
 
       expect(create_course_page).to have_content(I18n.t('errors.course.desc_too_long'))

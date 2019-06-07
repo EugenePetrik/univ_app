@@ -20,16 +20,17 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with valid data' do
-    it 'profile saved', tag: 'smoke' do
-      pass = pass_confirm = Faker::Internet.password
-
-      params_user_data = {
+    let(:pass) { Faker::Internet.password }
+    let(:params_user_data) do
+      {
         name: Faker::Name.name,
         email: Faker::Internet.email,
         pass: pass,
         pass_confirm: pass
       }
+    end
 
+    it 'profile saved', tag: 'smoke' do
       edit_profile_page.edit_profile_with(params_user_data)
 
       expect(view_profile_page).to be_displayed
@@ -43,9 +44,9 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'without editing password' do
-    it 'profile saved', tag: 'smoke' do
-      params_user_data = attributes_for(:student)
+    let(:params_user_data) { attributes_for(:student) }
 
+    it 'profile saved', tag: 'smoke' do
       edit_profile_page.edit_profile_with(params_user_data)
 
       expect(view_profile_page).to have_content(I18n.t('students.update.success_updated_profile'))
@@ -64,9 +65,9 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with too long name' do
-    it 'raises an error' do
-      name = Faker::Lorem.characters(rand(51..100))
+    let(:name) { Faker::Lorem.characters(rand(51..100)) }
 
+    it 'raises an error' do
       edit_profile_page.edit_profile_with(name: name)
 
       expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_long'))
@@ -74,9 +75,9 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with too short name' do
-    it 'raises an error' do
-      name = Faker::Lorem.characters(rand(1..4))
+    let(:name) { Faker::Lorem.characters(rand(1..4)) }
 
+    it 'raises an error' do
       edit_profile_page.edit_profile_with(name: name)
 
       expect(view_profile_page).to have_content(I18n.t('errors.student.name_too_short'))
@@ -93,9 +94,9 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with invalid email' do
-    it 'raises an error' do
-      email = "#{Faker::Internet.username}@#{Faker::Internet.domain_word}"
+    let(:email) { "#{Faker::Internet.username}@#{Faker::Internet.domain_word}" }
 
+    it 'raises an error' do
       edit_profile_page.edit_profile_with(email: email)
 
       expect(view_profile_page).to have_content(I18n.t('errors.student.invalid_email'))
@@ -103,12 +104,14 @@ RSpec.describe 'Edit Profile', type: :feature do
   end
 
   context 'with different password and password confirmation' do
-    it 'raises an error' do
-      params_user_data = {
+    let(:params_user_data) do
+      {
         pass: Faker::Internet.password,
         pass_confirm: Faker::Internet.password
       }
+    end
 
+    it 'raises an error' do
       edit_profile_page.edit_profile_with(params_user_data)
 
       expect(view_profile_page).to have_content(I18n.t('errors.student.pass_does_not_match'))

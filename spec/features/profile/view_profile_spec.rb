@@ -3,12 +3,7 @@
 RSpec.describe 'View Profile', type: :feature do
   let(:log_in_page) { LogInPage.new }
   let(:view_profile_page) { ViewProfilePage.new }
-  let(:edit_profile_page) { EditProfilePage.new }
-  let(:student) { create(:student, courses: [course1, course2, course3]) }
-  let(:course1) { create(:course) }
-  let(:course2) { create(:course) }
-  let(:course3) { create(:course) }
-  let!(:course4) { create(:course) }
+  let(:student) { create(:student, :with_courses, courses_count: 3) }
 
   before do
     log_in_page.load
@@ -35,12 +30,15 @@ RSpec.describe 'View Profile', type: :feature do
     end
 
     it 'course names match' do
+      course = Course.all
       expect(view_profile_page.course_links.map(&:text))
-        .to match_array([course1.name, course2.name, course3.name])
+        .to match_array([course[0].name, course[1].name, course[2].name])
     end
   end
 
   context 'when click to the edit profile button' do
+    let(:edit_profile_page) { EditProfilePage.new }
+
     it 'edit profile page is displayed', tag: 'smoke' do
       view_profile_page.click_to_edit_profile_button
 

@@ -60,6 +60,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'simplecov', '~> 0.16.1'
 end
 
 group :test do
@@ -70,7 +71,6 @@ group :test do
   gem 'chromedriver-helper', '~> 2.1'
   gem 'database_cleaner', '~> 1.7'
   gem 'selenium-webdriver'
-  gem 'simplecov', '~> 0.16.1'
   gem 'site_prism', '~> 3.0', '>= 3.0.3'
   # RSpec testing framework
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
