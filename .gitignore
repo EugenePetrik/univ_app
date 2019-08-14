@@ -29,3 +29,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore test coverage files
+/coverage/
+
+# Allows RSpec to persist some state between runs
+/spec/examples.txt

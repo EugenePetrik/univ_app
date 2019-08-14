@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class StudentsController < ApplicationController
-  skip_before_action :require_user, only: [:new, :create]
+  skip_before_action :require_user
   before_action :set_student, only: [:show, :edit, :update]
   before_action :require_same_student, only: [:edit, :update]
 
@@ -7,8 +9,7 @@ class StudentsController < ApplicationController
     @students = Student.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @student = Student.new
@@ -24,8 +25,7 @@ class StudentsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @student.update(student_params)

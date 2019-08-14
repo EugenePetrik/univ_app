@@ -2,8 +2,8 @@
   <div class="col s6 m6">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <span class="card-title"><%= t('.name') %>: <%= @student.name %></span>
-        <p><%= t('.email') %>: <%= @student.email %></p>
+        <span class="card-title"><%= @student.name %></span>
+        <p><%= @student.email %></p>
       </div>
     </div>
     <% if current_user == @student %>
@@ -21,7 +21,9 @@
           <% else %>
             <ul>
               <% @student.courses.each do |course| %>
-                <li><%= link_to course.name, course_path(course), class: "grey-text text-lighten-3" %></li>
+                <%= content_tag :li, class: "grey-text text-lighten-3", data: { qa: course.id } do %>
+                  <%= link_to course.name, course_path(course), class: "grey-text text-lighten-3" %>
+                <% end %>
               <% end %>
             </ul>
           <% end %>

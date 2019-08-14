@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -53,19 +55,25 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'simplecov', '~> 0.16.1'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.13', '>= 3.13.2'
+  gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'chromedriver-helper', '~> 2.1'
+  gem 'database_cleaner', '~> 1.7'
   gem 'selenium-webdriver'
+  gem 'site_prism', '~> 3.0', '>= 3.0.3'
   # RSpec testing framework
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
+  # Code style checking for RSpec files
+  gem 'rubocop-rspec', '~> 1.32'
 end

@@ -114,3 +114,21 @@ en:
       success_sign_up: You have successfully signed up!
   success_create: "You have successfully create %{course_name}!"
   success_enroll: "You have successfully enrolled in %{course_name}"
+  errors:
+    course:
+      name_is_blank: Name can't be blank
+      name_too_short: Name is too short (minimum is 5 characters)
+      name_too_long: Name is too long (maximum is 50 characters)
+      short_name_is_blank: Short name can't be blank
+      short_name_too_short: Short name is too short (minimum is 3 characters)
+      short_name_too_long: Short name is too long (maximum is 15 characters)
+      desc_is_blank: Description can't be blank
+      desc_too_short: Description is too short (minimum is 10 characters)
+      desc_too_long: Description is too long (maximum is 300 characters)
+    student:
+      name_is_blank: Name can't be blank
+      name_too_short: Name is too short (minimum is 5 characters)
+      name_too_long: Name is too long (maximum is 50 characters)
+      email_is_blank: Email can't be blank
+      invalid_email: Email is invalid
+      pass_does_not_match: Password confirmation doesn't match Password

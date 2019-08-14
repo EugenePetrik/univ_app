@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 class LoginsController < ApplicationController
   skip_before_action :require_user, only: [:new, :create]
 
-  def new
-
-  end
+  def new; end
 
   def create
     student = Student.find_by(email: params[:logins][:email].downcase)
 
-    if student && student.authenticate(params[:logins][:password])
+    if student&.authenticate(params[:logins][:password])
       session[:student_id] = student.id
       flash[:notice] = t('.success_log_in')
       redirect_to student
